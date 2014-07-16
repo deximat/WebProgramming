@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import dejanpe.zadatak1.server.core.flight.FlightDAO;
+import dejanpe.zadatak1.server.core.passenger.PassengerDAO;
+import dejanpe.zadatak1.server.core.user.UserDAO;
+
 public class Server extends Thread {
 
 	public static void main(final String[] args) {
@@ -15,6 +19,7 @@ public class Server extends Thread {
 
 	@Override
 	public void run() {
+		initDAOs();
 		ServerSocket serverSocket = null;
 		try {
 			serverSocket = new ServerSocket(this.PORT);
@@ -42,5 +47,11 @@ public class Server extends Thread {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void initDAOs() {
+		UserDAO.get();
+		FlightDAO.get();
+		PassengerDAO.get();
 	}
 }

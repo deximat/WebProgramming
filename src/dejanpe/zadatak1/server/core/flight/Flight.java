@@ -7,6 +7,8 @@ import java.util.Map;
 import dejanpe.zadatak1.server.core.passenger.Passenger;
 
 public class Flight implements Serializable {
+
+	private static final long serialVersionUID = 4181421455147017958L;
 	private String flightId;
 	private String departureTime;
 	private String arrivalTime;
@@ -16,6 +18,10 @@ public class Flight implements Serializable {
 
 	private int numberOfReservations;
 	private Map<String, Passenger> passengers = new HashMap<>();
+
+	public Flight() {
+
+	}
 
 	public Flight(final String flightId, final String departureTime, final String arrivalTime, final String source,
 			final String destination, final int numberOfPassingers) {
@@ -46,8 +52,36 @@ public class Flight implements Serializable {
 		return this.flightId.equals(f.flightId);
 	}
 
+	public String getArrivalTime() {
+		return this.arrivalTime;
+	}
+
+	public String getDepartureTime() {
+		return this.departureTime;
+	}
+
+	public String getDestination() {
+		return this.destination;
+	}
+
 	public String getFlightId() {
 		return this.flightId;
+	}
+
+	public int getNumberOfPassingers() {
+		return this.numberOfPassingers;
+	}
+
+	public int getNumberOfReservations() {
+		return this.numberOfReservations;
+	}
+
+	public Map<String, Passenger> getPassengers() {
+		return this.passengers;
+	}
+
+	public String getSource() {
+		return this.source;
 	}
 
 	@Override
@@ -67,9 +101,42 @@ public class Flight implements Serializable {
 		}
 	}
 
+	public void setArrivalTime(final String arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public void setDepartureTime(final String departureTime) {
+		this.departureTime = departureTime;
+	}
+
+	public void setDestination(final String destination) {
+		this.destination = destination;
+	}
+
+	public void setFlightId(final String flightId) {
+		this.flightId = flightId;
+	}
+
+	public void setNumberOfPassingers(final int numberOfPassingers) {
+		this.numberOfPassingers = numberOfPassingers;
+	}
+
+	public void setNumberOfReservations(final int numberOfReservations) {
+		this.numberOfReservations = numberOfReservations;
+	}
+
+	public void setPassengers(final Map<String, Passenger> passengers) {
+		this.passengers = passengers;
+	}
+
+	public void setSource(final String source) {
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		return "Flight(" + this.flightId + " from " + this.source + " to " + this.destination + " with capacity of "
-				+ this.numberOfPassingers + " there is still " + (this.numberOfPassingers - this.numberOfReservations) + " of reservations available )";
+				+ this.numberOfPassingers + " there is still " + (this.numberOfPassingers - this.numberOfReservations)
+				+ " of reservations available )";
 	}
 }

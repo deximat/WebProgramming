@@ -9,8 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class UserDAO implements Serializable {
 
@@ -23,40 +23,34 @@ public class UserDAO implements Serializable {
 		return INSTANCE;
 	}
 
-	private List<User> registredUsers = new ArrayList<User>();
+	private Map<String, User> registredUsers;
 
 	private final static UserDAO INSTANCE = new UserDAO();
 
 	private static final String USERS_PERSISTANCE_FILE = "users.txt";
 
 	public UserDAO() {
-		loadUsers();
+		this.registredUsers = loadUsers();
 	}
 
 	public synchronized User findUserByUsername(final String username) {
-		for (User user : this.registredUsers) {
-			if (user.getUsername().equals(username)) {
-				return user;
-			}
-		}
-		return null;
+		return this.registredUsers.get(username);
 	}
 
-	public ArrayList<User> loadUsers() {
+	public Map<String, User> loadUsers() {
 		try {
-			XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("USERS_PERSISTANCE_FILE")));
-			return (ArrayList<User>) decoder.readObject();
+			XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(USERS_PERSISTANCE_FILE)));
+			return (Map<String, User>) decoder.readObject();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new ArrayList();
+		return new TreeMap();
 	}
 
 	private void persist() {
 		try {
-			XMLEncoder encoder = new XMLEncoder(
-					new BufferedOutputStream(new FileOutputStream("USERS_PERSISTANCE_FILE")));
+			XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(USERS_PERSISTANCE_FILE)));
 			encoder.writeObject(this.registredUsers);
 			encoder.close();
 		} catch (IOException e) {
@@ -68,12 +62,11 @@ public class UserDAO implements Serializable {
 
 	public synchronized boolean registerUser(final String username) {
 		// check if it exists
-		// TODO: username is not type USER
-		if (this.registredUsers.contains(username)) {
+		if (this.registredUsers.get(username) != null) {
 			return false;
 		}
 		// add user to registred users
-		this.registredUsers.add(new User(username));
+		this.registredUsers.put(username, new User(username));
 		// persist to file
 		persist();
 		return true;
