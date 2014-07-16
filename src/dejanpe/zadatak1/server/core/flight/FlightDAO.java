@@ -1,15 +1,54 @@
 package dejanpe.zadatak1.server.core.flight;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
 import dejanpe.zadatak1.server.core.passenger.Passenger;
+import dejanpe.zadatak1.server.core.user.User;
 
 public class FlightDAO {
 	
+	private static final String FLIGHTS_PERSISTANCE_FILE = "flights.txt";
+
+	public TreeMap<String, Flight> loadFlights() {
+		try {
+			XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FLIGHTS_PERSISTANCE_FILE)));
+			return (TreeMap<String, Flight>) decoder.readObject();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new TreeMap<String, Flight>();
+	}
+
+	private void persist() {
+		try {
+			XMLEncoder encoder = new XMLEncoder(
+					new BufferedOutputStream(new FileOutputStream(FLIGHTS_PERSISTANCE_FILE)));
+			encoder.writeObject(this.registredFlights);
+			encoder.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	private static final FlightDAO INSTANCE = new FlightDAO();
 	
+	private FlightDAO() {
+		this.registredFlights = loadFlights();
+	}
 	public static FlightDAO get() {
 		return INSTANCE;
 	}
@@ -28,7 +67,7 @@ public class FlightDAO {
 		return this.registredFlights.values();
 	}
 
-	public Flight getFlightById(String flightId) {
+	public synchronized Flight getFlightById(String flightId) {
 		return this.registredFlights.get(flightId);
 	}
 
@@ -45,7 +84,7 @@ public class FlightDAO {
 		}
 	}
 
-	public String cancel(String flightId, Passenger passenger) {
+	public synchronized String cancel(String flightId, Passenger passenger) {
 		Flight flight = getFlightById(flightId);
 		if (flight == null) {
 			return "Flight doesn't exist";
