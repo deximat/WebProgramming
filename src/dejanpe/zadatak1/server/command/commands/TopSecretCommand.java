@@ -6,7 +6,7 @@ public class TopSecretCommand extends AbstractCommand {
 
 	@Override
 	protected void executeCommand() {
-		this.result = "You have seen the secret now, since you are logged in, MASTER!";		
+		this.result = "You have seen the secret now, since you are logged in, MASTER!";
 	}
 
 	@Override

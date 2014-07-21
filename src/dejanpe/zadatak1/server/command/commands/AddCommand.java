@@ -12,6 +12,13 @@ public class AddCommand extends AbstractCommand {
 		this.flight = flight;
 	}
 
+	/**
+	 * Instantiates for failed parsing. 
+	 */
+	public AddCommand() {
+		this.result = "Parse failed!";
+	}
+
 	@Override
 	protected void executeCommand() {
 		if (FlightDAO.get().insert(this.flight)) {

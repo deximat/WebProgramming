@@ -42,8 +42,7 @@ public class UserDAO implements Serializable {
 			XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(USERS_PERSISTANCE_FILE)));
 			return (Map<String, User>) decoder.readObject();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("No users to load!");
 		}
 		return new TreeMap();
 	}

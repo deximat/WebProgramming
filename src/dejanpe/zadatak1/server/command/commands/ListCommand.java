@@ -8,10 +8,10 @@ public class ListCommand extends AbstractCommand {
 
 	private String flightId;
 
-	public ListCommand(String flightId) {
+	public ListCommand(final String flightId) {
 		this.flightId = flightId;
 	}
-	
+
 	@Override
 	protected void executeCommand() {
 		Flight flight = FlightDAO.get().getFlightById(this.flightId);

@@ -12,13 +12,13 @@ import dejanpe.zadatak1.server.command.CommandBuilder;
 import dejanpe.zadatak1.server.core.user.User;
 
 public class Worker extends Thread {
-	public static Worker getCurrent() {
-		return CURRENT_WORKER.get();
-	}
-
 	private static final String END = "END_OF_STREAM_FF44FF";
 
 	private final static ThreadLocal<Worker> CURRENT_WORKER = new ThreadLocal<Worker>();
+
+	public static Worker getCurrent() {
+		return CURRENT_WORKER.get();
+	}
 
 	private final Socket client;
 	private Scanner in;
@@ -42,12 +42,12 @@ public class Worker extends Thread {
 	private Command readCommand() {
 		String[] commandAndParams = this.in.nextLine().split(" ");
 		String command = commandAndParams[0];
-		String[] params = Arrays.copyOfRange(commandAndParams, 1, commandAndParams.length );
+		String[] params = Arrays.copyOfRange(commandAndParams, 1, commandAndParams.length);
 		Command commandBuilt = CommandBuilder.build(command, params);
 		// if logged in this will enable us to execute autorization commands
 		if (commandBuilt != null) {
 			commandBuilt.setUserInvoker(this.userInvoker);
-		}
+		} 
 		return commandBuilt;
 	}
 
@@ -67,7 +67,7 @@ public class Worker extends Thread {
 					break;
 				}
 			} else {
-				sendResponse("Wrong number of parameters command couldn't be executed!");
+				sendResponse("Wrong number of parameters or command doesn't exist!");
 			}
 		}
 		try {

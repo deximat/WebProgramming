@@ -1,6 +1,7 @@
 package dejanpe.zadatak1.server.core.flight;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,8 +11,8 @@ public class Flight implements Serializable {
 
 	private static final long serialVersionUID = 4181421455147017958L;
 	private String flightId;
-	private String departureTime;
-	private String arrivalTime;
+	private Date departureTime;
+	private Date arrivalTime;
 	private String source;
 	private String destination;
 	private int numberOfPassingers;
@@ -23,7 +24,7 @@ public class Flight implements Serializable {
 
 	}
 
-	public Flight(final String flightId, final String departureTime, final String arrivalTime, final String source,
+	public Flight(final String flightId, final Date departureTime, final Date arrivalTime, final String source,
 			final String destination, final int numberOfPassingers) {
 		this.flightId = flightId;
 		this.departureTime = departureTime;
@@ -52,11 +53,11 @@ public class Flight implements Serializable {
 		return this.flightId.equals(f.flightId);
 	}
 
-	public String getArrivalTime() {
+	public Date getArrivalTime() {
 		return this.arrivalTime;
 	}
 
-	public String getDepartureTime() {
+	public Date getDepartureTime() {
 		return this.departureTime;
 	}
 
@@ -101,11 +102,11 @@ public class Flight implements Serializable {
 		}
 	}
 
-	public void setArrivalTime(final String arrivalTime) {
+	public void setArrivalTime(final Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public void setDepartureTime(final String departureTime) {
+	public void setDepartureTime(final Date departureTime) {
 		this.departureTime = departureTime;
 	}
 

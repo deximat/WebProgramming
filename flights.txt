@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_51" class="java.beans.XMLDecoder">
+ <object class="java.util.TreeMap">
+  <void method="put">
+   <string>101F</string>
+   <object class="dejanpe.zadatak1.server.core.flight.Flight">
+    <void property="arrivalTime">
+     <object class="java.util.Date">
+      <long>1406004420000</long>
+     </object>
+    </void>
+    <void property="departureTime">
+     <object class="java.util.Date">
+      <long>1406001300000</long>
+     </object>
+    </void>
+    <void property="destination">
+     <string>Madrid</string>
+    </void>
+    <void property="flightId">
+     <string>101F</string>
+    </void>
+    <void property="numberOfPassingers">
+     <int>3</int>
+    </void>
+    <void property="numberOfReservations">
+     <int>1</int>
+    </void>
+    <void property="passengers">
+     <void method="put">
+      <string>33344</string>
+      <object class="dejanpe.zadatak1.server.core.passenger.Passenger">
+       <void property="JMBG">
+        <string>33344</string>
+       </void>
+       <void property="name">
+        <string>Dejan</string>
+       </void>
+       <void property="surname">
+        <string>Pekter</string>
+       </void>
+      </object>
+     </void>
+    </void>
+    <void property="source">
+     <string>Beograd</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

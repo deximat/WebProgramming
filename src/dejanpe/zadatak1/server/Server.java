@@ -17,6 +17,12 @@ public class Server extends Thread {
 
 	private final int PORT = 1234;
 
+	private void initDAOs() {
+		UserDAO.get();
+		FlightDAO.get();
+		PassengerDAO.get();
+	}
+
 	@Override
 	public void run() {
 		initDAOs();
@@ -38,7 +44,7 @@ public class Server extends Thread {
 			} catch (IOException e) {
 				e.printStackTrace();
 				System.out.println("Error occured while accepting client.");
-			} 
+			}
 		}
 		try {
 			serverSocket.close();
@@ -47,11 +53,5 @@ public class Server extends Thread {
 			e.printStackTrace();
 		}
 
-	}
-
-	private void initDAOs() {
-		UserDAO.get();
-		FlightDAO.get();
-		PassengerDAO.get();
 	}
 }

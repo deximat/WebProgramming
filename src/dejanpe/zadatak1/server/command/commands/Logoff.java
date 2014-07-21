@@ -14,5 +14,5 @@ public class Logoff extends AbstractCommand {
 	@Override
 	public boolean shouldAutorize() {
 		return true;
-	}	
+	}
 }

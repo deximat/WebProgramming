@@ -9,11 +9,11 @@ import dejanpe.zadatak1.server.core.user.UserDAO;
 public class LoginCommand extends AbstractCommand implements Command {
 
 	private String username;
-	
-	public LoginCommand(String username) {
+
+	public LoginCommand(final String username) {
 		this.username = username;
 	}
-	
+
 	@Override
 	protected void executeCommand() {
 		User userLoggedIn = UserDAO.get().findUserByUsername(this.username);

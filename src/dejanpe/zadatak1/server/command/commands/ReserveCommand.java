@@ -16,7 +16,7 @@ public class ReserveCommand extends AbstractCommand {
 
 	@Override
 	protected void executeCommand() {
-		this.result =  FlightDAO.get().reserveFlight(this.flightId, this.passenger);
+		this.result = FlightDAO.get().reserveFlight(this.flightId, this.passenger);
 	}
 
 	@Override

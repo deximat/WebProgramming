@@ -7,10 +7,11 @@ import dejanpe.zadatak1.server.core.passenger.PassengerDAO;
 public class ListPassengerCommand extends AbstractCommand {
 
 	private String JMBG;
-	
-	public ListPassengerCommand(String JMBG) {
+
+	public ListPassengerCommand(final String JMBG) {
 		this.JMBG = JMBG;
 	}
+
 	@Override
 	protected void executeCommand() {
 		Passenger passenger = PassengerDAO.get().getPassengerByJMBG(this.JMBG);

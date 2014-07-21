@@ -3,18 +3,16 @@ package dejanpe.zadatak1.server.core.passenger;
 import java.io.Serializable;
 
 public class Passenger implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4100224177712466654L;
 	private String JMBG;
 	private String name;
 	private String surname;
 
 	public Passenger() {
-		
+
 	}
-	
+
 	public Passenger(final String JMBG, final String name, final String surname) {
 		this.JMBG = JMBG;
 		this.name = name;

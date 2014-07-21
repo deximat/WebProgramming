@@ -1,5 +1,9 @@
 package dejanpe.zadatak1.server.command;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import dejanpe.zadatak1.server.command.commands.AddCommand;
 import dejanpe.zadatak1.server.command.commands.CancelCommand;
 import dejanpe.zadatak1.server.command.commands.ListAllCommand;
@@ -61,9 +65,17 @@ public enum CommandType {
 			if (params.length != 6) {
 				return null;
 			}
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
 			String flightId = params[0];
-			String departureTime = params[1];
-			String arrivalTime = params[2];
+			Date departureTime;
+			Date arrivalTime;
+			try {
+				departureTime = simpleDateFormat.parse(params[1]);
+				arrivalTime = simpleDateFormat.parse(params[2]);
+			} catch (ParseException e) {
+				return new AddCommand();
+			}
+			
 			String source = params[3];
 			String destination = params[4];
 			int numberOfPassingers = Integer.parseInt(params[5]);

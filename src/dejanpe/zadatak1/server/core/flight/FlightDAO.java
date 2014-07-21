@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 import dejanpe.zadatak1.server.core.passenger.Passenger;
 
@@ -35,6 +36,14 @@ public class FlightDAO {
 		if (flight == null) {
 			return "Flight doesn't exist";
 		}
+		// check for time constraint
+		long now = System.currentTimeMillis();
+		long millisUntilFlight = flight.getDepartureTime().getTime() - now;
+
+		if (TimeUnit.MILLISECONDS.toHours(millisUntilFlight) < 24) {
+			return "It is too late to cancel reservation now!";
+		}
+
 		if (flight.cancel(passenger)) {
 			persist();
 			return "Canceled reservation succesfully";
@@ -65,8 +74,7 @@ public class FlightDAO {
 			XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FLIGHTS_PERSISTANCE_FILE)));
 			return (TreeMap<String, Flight>) decoder.readObject();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("No flights to load!");
 		}
 		return new TreeMap<String, Flight>();
 	}

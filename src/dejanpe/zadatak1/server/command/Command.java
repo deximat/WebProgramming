@@ -4,6 +4,8 @@ import dejanpe.zadatak1.server.core.user.User;
 
 public interface Command {
 	void execute();
-	String getResult();	
+
+	String getResult();
+
 	void setUserInvoker(User userInvoker);
 }
